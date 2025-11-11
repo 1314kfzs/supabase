@@ -16,7 +16,7 @@ const HomePage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              欢迎来到{profile?.full_name || '张三'}的
+              欢迎来到{profile?.full_name || '施贻鹏'}的
               <span className="text-primary-500"> 作品集与博客</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
