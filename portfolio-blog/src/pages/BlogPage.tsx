@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useBlogPostsWithFallback } from '../hooks/useBlogPostsWithFallback'
+import { BlogPost } from '../types'
 
 const BlogPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('全部')
@@ -8,39 +9,9 @@ const BlogPage: React.FC = () => {
   const [postsPerPage] = useState(4) // 每页显示4篇文章
   const [searchTerm, setSearchTerm] = useState('') // 搜索关键词
 
-  const categories = ['全部', 'React', 'TypeScript', 'Node.js', '数据库', 'DevOps', '前端']
+  const categories = ['全部', 'React', 'TypeScript', 'Node.js', '数据库', 'DevOps', '前端', '后端', '最佳实践', 'JavaScript', '类型安全', '微服务', 'Docker']
 
-  // 从Supabase获取所有博客文章数据，失败时使用模拟数据
   const { data: blogPosts = [], isLoading, error } = useBlogPostsWithFallback()
-
-  // 处理加载状态
-  if (isLoading) {
-    return (
-      <div className="py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-white mb-4">技术博客</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="card animate-pulse">
-                  <div className="bg-gray-700 h-48 rounded-lg mb-6"></div>
-                  <div className="h-6 bg-gray-700 rounded mb-3 w-1/4"></div>
-                  <div className="h-4 bg-gray-700 rounded mb-3 w-3/4"></div>
-                  <div className="h-4 bg-gray-700 rounded mb-4 w-full"></div>
-                  <div className="h-4 bg-gray-700 rounded mb-4 w-2/3"></div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // 处理错误状态 - 但仍然显示数据（因为有fallback）
-  if (error) {
-    console.warn('Failed to fetch blog posts, using fallback data:', error)
-  }
 
   // 按分类和搜索关键词筛选
   const filteredPosts = blogPosts.filter(post => {
@@ -50,7 +21,7 @@ const BlogPage: React.FC = () => {
     // 搜索关键词筛选（不区分大小写）
     const searchMatch = !searchTerm ||
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (post.excerpt && post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
 
     return categoryMatch && searchMatch
@@ -101,17 +72,60 @@ const BlogPage: React.FC = () => {
     setCurrentPage(1) // 搜索时重置到第一页
   }
 
-  // 根据标题生成对应的slug
-  const getPostSlug = (title: string) => {
-    const slugMap: Record<string, string> = {
-      'React Hooks 最佳实践': 'react-hooks-最佳实践',
-      'TypeScript 类型系统详解': 'typescript-类型系统详解',
-      'Node.js 性能优化指南': 'nodejs-性能优化指南',
-      'PostgreSQL 数据库设计模式': 'postgresql-数据库设计模式',
-      'Docker容器化部署实战': 'docker容器化部署实战',
-      '前端工程化建设指南': '前端工程化建设指南'
-    }
-    return slugMap[title] || title.toLowerCase().replace(/\s+/g, '-')
+  // 加载状态
+  if (isLoading) {
+    return (
+      <div className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="h-10 bg-gray-700 rounded w-64 mx-auto mb-4 animate-pulse"></div>
+            <div className="h-6 bg-gray-700 rounded w-96 mx-auto animate-pulse"></div>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            {categories.map((category) => (
+              <div key={category} className="h-10 w-20 bg-gray-700 rounded-full animate-pulse"></div>
+            ))}
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="card">
+                <div className="bg-gray-700 h-48 rounded-lg mb-6 animate-pulse"></div>
+                <div className="h-6 bg-gray-700 rounded w-1/3 mb-3 animate-pulse"></div>
+                <div className="h-8 bg-gray-700 rounded mb-3 animate-pulse"></div>
+                <div className="space-y-2 mb-4">
+                  <div className="h-4 bg-gray-700 rounded animate-pulse"></div>
+                  <div className="h-4 bg-gray-700 rounded w-5/6 animate-pulse"></div>
+                  <div className="h-4 bg-gray-700 rounded w-3/4 animate-pulse"></div>
+                </div>
+                <div className="h-5 bg-gray-700 rounded w-1/4 animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // 错误状态
+  if (error) {
+    return (
+      <div className="py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-2xl font-bold text-white mb-4">加载失败</h1>
+          <p className="text-gray-400 mb-8">
+            加载博客文章时出错: {error.message}
+          </p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="btn-primary"
+          >
+            重新加载
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -173,7 +187,7 @@ const BlogPage: React.FC = () => {
           {currentPosts.map((post) => (
             <article key={post.id} className="card hover:shadow-lg transition-shadow">
               <div className="bg-gray-700 h-48 rounded-lg mb-6 overflow-hidden relative cursor-pointer">
-                <Link to={`/blog/${getPostSlug(post.title)}`} className="block w-full h-full">
+                <Link to={`/blog/${post.slug}`} className="block w-full h-full">
                   <img
                     src={post.image_url}
                     alt={post.title}
@@ -193,7 +207,7 @@ const BlogPage: React.FC = () => {
                   {post.tags[0] || '技术文章'}
                 </span>
                 <div className="text-sm text-gray-500">
-                  {new Date(post.published_at || post.created_at).toLocaleDateString()} • 5分钟阅读
+                  {new Date(post.published_at || post.created_at).toLocaleDateString()} • {post.read_time || 5}分钟阅读
                 </div>
               </div>
 
@@ -214,7 +228,7 @@ const BlogPage: React.FC = () => {
               </div>
 
               <Link
-                to={`/blog/${getPostSlug(post.title)}`}
+                to={`/blog/${post.slug}`}
                 className="text-primary-500 hover:text-primary-400 font-medium"
               >
                 阅读全文 →

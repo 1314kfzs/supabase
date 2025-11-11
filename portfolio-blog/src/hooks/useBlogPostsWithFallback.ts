@@ -23,52 +23,44 @@ interface BlogPost {
 const mockBlogPosts: BlogPost[] = [
   {
     id: '1',
-    title: 'React Hooks 最佳实践',
-    slug: 'react-hooks-最佳实践',
+    title: 'React Hooks 最佳实践指南',
+    slug: 'react-hooks-best-practices',
     content: `
-      <h2>引言</h2>
-      <p>React Hooks 自 16.8 版本引入以来，彻底改变了我们编写 React 组件的方式。它们让我们能够在函数组件中使用状态和其他 React 特性，而无需编写类组件。然而，随着 Hooks 的普及，我们也遇到了一些常见的陷阱和最佳实践。</p>
-      
-      <h2>useState 的最佳实践</h2>
-      <p>useState 是最常用的 Hook 之一，用于在函数组件中添加状态。以下是一些最佳实践：</p>
-      
-      <h3>1. 函数式更新</h3>
-      <p>当新的状态依赖于旧的状态时，应该使用函数式更新：</p>
-      
-      <pre><code>const [count, setCount] = useState(0)
+      <h2>React Hooks 最佳实践指南</h2>
 
-// 错误的方式
-setCount(count + 1)
+      <h3>引言</h3>
+      <p>React Hooks 自16.8版本引入以来，彻底改变了React开发方式。本文将分享一些实用的Hooks使用技巧和最佳实践。</p>
 
-// 正确的方式
-setCount(prevCount => prevCount + 1)</code></pre>
+      <h3>核心Hooks使用</h3>
+      <p><strong>useState</strong></p>
+      <pre><code>const [state, setState] = useState(initialValue);</code></pre>
       
-      <h3>2. 状态合并</h3>
-      <p>当有多个相关联的状态时，考虑将它们合并到一个对象中：</p>
-      
-      <pre><code>const [user, setUser] = useState({
-        name: '',
-        email: '',
-        age: 0
-      })
+      <p><strong>useEffect</strong></p>
+      <pre><code>useEffect(() => {
+  // 副作用逻辑
+  return () => {
+    // 清理函数
+  };
+}, [dependencies]);</code></pre>
 
-// 更新部分状态
-setUser(prev => ({ ...prev, name: 'John' }))</code></pre>
-      
-      <h2>useEffect 的注意事项</h2>
-      <p>useEffect 用于处理副作用，但如果不正确使用，可能会导致性能问题：</p>
-      
-      <h2>自定义 Hooks</h2>
-      <p>自定义 Hooks 让我们能够提取可重用的状态逻辑，提高代码复用性。</p>
-      
-      <h2>总结</h2>
-      <p>React Hooks 提供了强大的能力，但也需要遵循最佳实践来避免常见陷阱。</p>
+      <h3>自定义Hooks</h3>
+      <p>创建可复用的自定义Hooks可以大大提高代码复用性。</p>
+
+      <h3>性能优化</h3>
+      <ul>
+        <li>使用useMemo缓存计算结果</li>
+        <li>使用useCallback缓存函数引用</li>
+        <li>合理使用依赖数组</li>
+      </ul>
+
+      <h3>总结</h3>
+      <p>掌握Hooks的使用技巧是成为React高手的关键一步。</p>
     `,
-    excerpt: 'React Hooks 自 16.8 版本引入以来，彻底改变了我们编写 React 组件的方式。它们让我们能够在函数组件中使用状态和其他 React 特性，而无需编写类组件。',
+    excerpt: '深入探讨React Hooks的使用技巧和最佳实践，帮助开发者写出更优雅的React代码。',
     image_url: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=600&fit=crop',
     published: true,
-    tags: ['React', 'Hooks', '前端', '最佳实践'],
-    view_count: 128,
+    tags: ['React', 'Hooks', '最佳实践', 'JavaScript'],
+    view_count: 156,
     created_at: '2024-01-15T00:00:00Z',
     updated_at: '2024-01-15T00:00:00Z',
     published_at: '2024-01-15T00:00:00Z',
@@ -76,26 +68,47 @@ setUser(prev => ({ ...prev, name: 'John' }))</code></pre>
   },
   {
     id: '2',
-    title: 'TypeScript 类型系统详解',
-    slug: 'typescript-类型系统详解',
+    title: 'TypeScript与React的完美结合',
+    slug: 'typescript-react-integration',
     content: `
-      <h2>TypeScript 类型系统概述</h2>
-      <p>TypeScript 的类型系统是其最强大的特性之一，提供了静态类型检查、接口、泛型等高级特性。</p>
-      
-      <h2>基础类型</h2>
-      <p>TypeScript 支持 JavaScript 的所有基础类型，并增加了枚举、元组等类型。</p>
-      
-      <h2>接口和类型别名</h2>
-      <p>接口和类型别名让我们能够定义复杂的对象结构，提高代码的可读性和可维护性。</p>
-      
-      <h2>泛型编程</h2>
-      <p>泛型允许我们创建可重用的组件，这些组件可以支持多种类型，同时保持类型安全。</p>
+      <h2>TypeScript与React的完美结合</h2>
+
+      <h3>TypeScript的优势</h3>
+      <p>TypeScript为React开发带来了以下优势：</p>
+      <ol>
+        <li><strong>类型安全</strong>: 编译时类型检查</li>
+        <li><strong>更好的IDE支持</strong>: 智能提示和自动补全</li>
+        <li><strong>代码可维护性</strong>: 清晰的接口定义</li>
+        <li><strong>团队协作</strong>: 减少沟通成本</li>
+      </ol>
+
+      <h3>配置TypeScript</h3>
+      <pre><code>{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "strict": true
+  }
+}</code></pre>
+
+      <h3>常用类型定义</h3>
+      <pre><code>interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+const UserCard: React.FC<{ user: User }> = ({ user }) => {
+  return <div>{user.name}</div>;
+};</code></pre>
+
+      <h3>总结</h3>
+      <p>TypeScript与React的结合是现代前端开发的最佳实践。</p>
     `,
-    excerpt: 'TypeScript 的类型系统是其最强大的特性之一，提供了静态类型检查、接口、泛型等高级特性。',
+    excerpt: '探索TypeScript如何与React结合，提供类型安全的前端开发体验。',
     image_url: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&h=600&fit=crop',
     published: true,
-    tags: ['TypeScript', '类型系统', '前端'],
-    view_count: 95,
+    tags: ['TypeScript', 'React', '前端开发', '类型安全'],
+    view_count: 89,
     created_at: '2024-01-10T00:00:00Z',
     updated_at: '2024-01-10T00:00:00Z',
     published_at: '2024-01-10T00:00:00Z',
@@ -103,26 +116,46 @@ setUser(prev => ({ ...prev, name: 'John' }))</code></pre>
   },
   {
     id: '3',
-    title: 'Node.js 性能优化指南',
-    slug: 'nodejs-性能优化指南',
+    title: 'Node.js微服务架构设计',
+    slug: 'nodejs-microservices-architecture',
     content: `
-      <h2>Node.js 性能优化概述</h2>
-      <p>Node.js 作为服务端 JavaScript 运行时，性能优化是开发高性能应用的关键。</p>
-      
-      <h2>内存管理</h2>
-      <p>合理的内存管理可以避免内存泄漏，提高应用稳定性。</p>
-      
-      <h2>异步处理优化</h2>
-      <p>利用异步编程模式，避免阻塞事件循环，提高并发处理能力。</p>
-      
-      <h2>监控和调试工具</h2>
-      <p>使用各种监控工具来识别性能瓶颈，进行针对性优化。</p>
+      <h2>Node.js微服务架构设计</h2>
+
+      <h3>微服务架构优势</h3>
+      <ul>
+        <li>服务解耦</li>
+        <li>独立部署</li>
+        <li>技术栈多样性</li>
+        <li>弹性伸缩</li>
+      </ul>
+
+      <h3>架构设计原则</h3>
+      <ol>
+        <li><strong>单一职责原则</strong></li>
+        <li><strong>服务自治</strong></li>
+        <li><strong>API网关模式</strong></li>
+        <li><strong>服务发现机制</strong></li>
+      </ol>
+
+      <h3>技术栈选择</h3>
+      <ul>
+        <li>Express.js/Fastify</li>
+        <li>Docker & Kubernetes</li>
+        <li>Redis缓存</li>
+        <li>RabbitMQ消息队列</li>
+      </ul>
+
+      <h3>监控与日志</h3>
+      <p>完善的监控和日志系统是微服务架构的保障。</p>
+
+      <h3>总结</h3>
+      <p>微服务架构需要综合考虑业务需求和技术选型。</p>
     `,
-    excerpt: 'Node.js 作为服务端 JavaScript 运行时，性能优化是开发高性能应用的关键。',
+    excerpt: '深入探讨基于Node.js的微服务架构设计原则和实现方案。',
     image_url: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop',
     published: true,
-    tags: ['Node.js', '性能优化', '后端'],
-    view_count: 87,
+    tags: ['Node.js', '微服务', '架构设计', 'Docker'],
+    view_count: 67,
     created_at: '2024-01-05T00:00:00Z',
     updated_at: '2024-01-05T00:00:00Z',
     published_at: '2024-01-05T00:00:00Z',

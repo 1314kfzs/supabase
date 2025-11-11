@@ -85,7 +85,7 @@ CREATE TRIGGER update_blog_posts_updated_at BEFORE UPDATE ON blog_posts
 -- 插入示例数据
 -- 1. 插入用户资料
 INSERT INTO profiles (id, username, full_name, email, bio, skills, avatar_url) VALUES
-('00000000-0000-0000-0000-000000000001', 'zhangsan', '张三', 'zhangsan@example.com', 
+('00000000-0000-0000-0000-000000000001', 'zhangsan', '施贻鹏', 'zhangsan@example.com', 
  '资深全栈开发者，专注于React、TypeScript和Node.js技术栈。热爱开源，乐于分享技术经验。',
  '{"React", "TypeScript", "Node.js", "Vue.js", "Python", "Docker", "Kubernetes", "PostgreSQL", "MongoDB"}',
  'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face');

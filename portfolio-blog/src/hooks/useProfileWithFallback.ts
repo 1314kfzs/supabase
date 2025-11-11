@@ -18,8 +18,8 @@ interface User {
 const mockProfile: User = {
   id: '1',
   email: 'user@example.com',
-  username: '张三',
-  full_name: '张三',
+  username: '施贻鹏',
+  full_name: '施贻鹏',
   avatar_url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop',
   bio: '全栈开发者，专注于React、Node.js和云计算技术。热爱开源，喜欢分享技术经验。',
   skills: ['React', 'TypeScript', 'Node.js', 'Python', 'Docker', 'AWS'],

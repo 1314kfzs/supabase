@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useBlogPostWithFallback } from '../hooks/useBlogPostsWithFallback'
+import { BlogPost } from '../types'
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
@@ -67,7 +68,7 @@ const BlogPostPage: React.FC = () => {
               {post.tags[0] || '技术文章'}
             </span>
             <span className="text-gray-400 text-sm">
-              {new Date(post.published_at || post.created_at).toLocaleDateString()} • 5分钟阅读
+              {new Date(post.published_at || post.created_at).toLocaleDateString()} • {post.read_time || 5}分钟阅读
             </span>
           </div>
           
