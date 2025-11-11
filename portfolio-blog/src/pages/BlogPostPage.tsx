@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useBlogPostWithFallback } from '../hooks/useBlogPostsWithFallback'
 
-
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>()
   const { data: post, isLoading, error } = useBlogPostWithFallback(slug || '')

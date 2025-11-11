@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useBlogPostsWithFallback } from '../hooks/useBlogPostsWithFallback'
-import { BlogPost } from '../types'
 
 const BlogPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('全部')
